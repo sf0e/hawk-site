@@ -10,6 +10,7 @@
 #   3. clones the Hawk source from GitHub
 #   4. builds it
 #   5. drops the binary at ~/.local/bin/hawk
+#   6. installs a desktop entry + icons so it shows up in rofi / app menus
 set -e
 
 REPO="sf0e/hawk"
@@ -77,6 +78,18 @@ ninja -C build
 
 mkdir -p "$BINDIR"
 install -m755 build/hawk "$BINDIR/hawk"
+
+say "installing menu entry and icons..."
+APPS="$HOME/.local/share/applications"
+ICONS="$HOME/.local/share/icons/hicolor"
+for s in 16 24 32 48 64 128 256; do
+  mkdir -p "$ICONS/$s/apps"
+  install -m644 "data/icons/hicolor/$s/apps/org.hawk.Hawk.png" "$ICONS/$s/apps/"
+done
+mkdir -p "$ICONS/scalable/apps"
+install -m644 data/icons/hicolor/scalable/apps/org.hawk.Hawk.svg "$ICONS/scalable/apps/"
+mkdir -p "$APPS"
+sed "s|^Exec=hawk|Exec=$BINDIR/hawk|" data/org.hawk.Hawk.desktop > "$APPS/org.hawk.Hawk.desktop"
 
 say "done. run it with:"
 echo
