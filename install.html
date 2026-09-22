@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>install &amp; uninstall — Hawk</title>
+<meta name="description" content="Install Hawk in one line, or take it off your machine. Either way, no residue.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+
+<header>
+  <nav>
+    <span class="brand">Hawk</span>
+    <a href="index.html">home</a>
+    <a href="features.html">features</a>
+    <a href="install.html" class="current">install</a>
+    <a href="docs.html">docs</a>
+    <a href="about.html">about</a>
+  </nav>
+  <h1>install &amp; uninstall</h1>
+  <p class="tagline">In one line. And out of your system, if it ever comes to that.</p>
+</header>
+
+<main>
+  <section>
+    <h2>install</h2>
+    <p>Linux only. GTK4 + WebKitGTK 6.0 are the only real requirements; the script installs them with your package manager.</p>
+    <p class="install">
+      <code>curl -fsSL https://sf0e.github.io/hawk-site/get/install.sh | sh</code>
+    </p>
+    <p>
+      First launch sets up the local search engine, which is slow and makes
+      coffee. Every launch after that is fine. It doesn't need root, but it
+      will happily accept your sudo password for the build dependencies.
+    </p>
+  </section>
+
+  <section id="uninstall">
+    <h2>uninstall</h2>
+    <p>The script lives right next to the installer, because leaving a browser installed after someone asks you to leave is not good manners.</p>
+    <p class="install">
+      <code>curl -fsSL https://sf0e.github.io/hawk-site/get/uninstall.sh | sh</code>
+    </p>
+    <p>
+      That removes the binary, the search manager, the desktop entry and the
+      icons, and leaves <code>~/.hawk</code> (your cookies, history, sessions)
+      in place — in case you come back.
+    </p>
+    <p class="install">
+      <code>curl -fsSL https://sf0e.github.io/hawk-site/get/uninstall.sh | sh -s -- --purge</code>
+    </p>
+    <p>
+      <code>--purge</code> also deletes <code>~/.hawk</code>. All of it. Your
+      logins, your history, the search engine. Gone. This is the point of no
+      return and the script will say so out loud before the end.
+    </p>
+  </section>
+
+  <section>
+    <h2>build it yourself</h2>
+    <p>
+      If you'd rather watch it burn in a terminal:
+    </p>
+    <p class="install">
+      <code>git clone https://github.com/sf0e/hawk &amp;&amp; cd hawk<br>meson setup build<br>ninja -C build<br>./build/hawk</code>
+    </p>
+    <p>Dependencies: <code>gtk4</code>, <code>webkitgtk-6.0</code> development headers, <code>meson</code>, <code>ninja</code>, a C compiler.</p>
+  </section>
+
+  <section>
+    <h2>where things live</h2>
+    <p>Hawk puts everything in one place, because "where did that go" is not a feature:</p>
+    <ul>
+      <li><code>~/.hawk/hawk.ini</code> — settings (edit from <code>hawk://config</code>, the browser-level way)</li>
+      <li><code>~/.hawk/history</code> — the URLs it remembers and types ahead</li>
+      <li><code>~/.hawk/session</code> — your open tabs, saved on close</li>
+      <li><code>~/.hawk/cookies/cookies.sqlite</code> — cookies. they persist. you stay logged in.</li>
+      <li><code>~/.hawk/searchd/</code> — the private SearXNG engine and its pidfile</li>
+    </ul>
+    <p><a href="docs.html#data">more detail in the docs →</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">home</a> ·
+    <a href="https://github.com/sf0e/hawk">source</a> ·
+    <a href="https://github.com/sf0e/hawk/blob/master/LICENSE">BSD-2 license</a>
+  </p>
+</footer>
+
+</body>
+</html>

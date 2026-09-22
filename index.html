@@ -3,13 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hawk — a browser for linux people</title>
-<meta name="description" content="Hawk is a small, privacy-first browser for Linux, written in C, with search that runs on your own machine.">
+<title>Hawk — a browser that stays out of your way</title>
+<meta name="description" content="Hawk is a small, privacy-first browser for Linux, written in C, with search that runs on your own machine. It remembers what you tell it, forgets what you ask it to, and dies quietly.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
+  <nav>
+    <span class="brand">Hawk</span>
+    <a href="index.html" class="current">home</a>
+    <a href="features.html">features</a>
+    <a href="install.html">install</a>
+    <a href="docs.html">docs</a>
+    <a href="about.html">about</a>
+  </nav>
   <div class="mark">
     <svg viewBox="0 0 64 48" role="img" aria-label="hawk">
       <path d="M4 40 Q18 4 60 4 Q60 20 46 30 Q28 42 4 40 Z
@@ -20,12 +28,14 @@
   <p class="kicker">a browser for linux people</p>
   <h1>Hawk</h1>
   <p class="tagline">
-    Small. Written in C. No telemetry, no account, no "AI", no drama.
-    Search runs on your machine or not at all.
+    Hawk, a browser that stays out of your way. Small, written in C,
+    no telemetry, no account, no "AI", no drama. Search runs on your
+    machine or not at all.
   </p>
   <p class="install">
     <code>curl -fsSL https://sf0e.github.io/hawk-site/get/install.sh | sh</code>
-    <span class="or">— or <a href="https://github.com/sf0e/hawk">build it from source</a></span>
+    <span class="or">or <a href="https://github.com/sf0e/hawk">build it from source</a>
+    · gone of it? <a href="install.html#uninstall">uninstall</a></span>
   </p>
 </header>
 
@@ -33,27 +43,16 @@
   <section>
     <h2>what it is</h2>
     <p>
-      Hawk is a GTK4 + WebKitGTK browser written in C. It has one pill-shaped
-      bar up top, small pill tabs below it, and nothing else. It looks like a
-      Safari that lost its funding round, which is the nicest thing I can say
-      about it.
+      A GTK4 + WebKitGTK browser written in C. One pill-shaped bar up top,
+      small pill tabs below it, and nothing else. Anything that tries to
+      get between you and the page loses. <a href="features.html">the whole list of ways it stays out of your way →</a>
     </p>
     <ul>
-      <li>tabs: <kbd>Ctrl+T</kbd> open, <kbd>Alt+W</kbd> close, <kbd>Ctrl+L</kbd> bar, <kbd>Ctrl+R</kbd> reload</li>
-      <li>cookies persist — your logins survive — nothing is wiped on exit</li>
+      <li>remembers the URLs you've been to. types ahead. like any browser should</li>
+      <li>cookies persist in <code>~/.hawk/cookies</code> — your logins survive — nothing is wiped on exit</li>
+      <li>your last session comes back when you reopen it</li>
       <li>third-party cookies blocked, camera &amp; mic off, one fixed user agent</li>
-      <li>popups become tabs, because popups are for cowards</li>
       <li>dark mode that also turns the web dark. yes, for real</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>what it is not</h2>
-    <ul class="not-list">
-      <li>not a Chrome reskin</li>
-      <li>not a data collector</li>
-      <li>not available for Windows or macOS, and never will be</li>
-      <li>not finished</li>
     </ul>
   </section>
 
@@ -62,8 +61,8 @@
     <p>
       Hawk keeps a private <b>SearXNG</b> on <code>127.0.0.1:8080</code>. It
       boots when you open the browser, dies when you close it, and your
-      queries never leave the machine to go find a search engine. If the
-      backend can't start, Hawk sighs and uses DuckDuckGo instead.
+      queries never leave the machine. If the backend can't start, Hawk
+      sighs and uses DuckDuckGo instead. <a href="docs.html#search">how it works →</a>
     </p>
   </section>
 
@@ -72,9 +71,9 @@
     <p>
       <b>alpha.</b> v0.1.0-alpha is out and the install command at the top of
       this page works. Linux only. It's a working browser — tabs, pills, dark
-      mode, local search — with a few rough edges, listed honestly in the
-      <a href="https://github.com/sf0e/hawk#readme">README</a>, which I
-      recommend reading out loud to the browser.
+      mode, local search, URL memory, sessions — with a few honest rough edges,
+      <a href="https://github.com/sf0e/hawk#readme">listed in the README</a>,
+      which I recommend reading out loud to the browser.
     </p>
   </section>
 </main>
@@ -83,6 +82,7 @@
   <p>
     <a href="https://github.com/sf0e/hawk">source</a> ·
     <a href="https://github.com/sf0e/hawk/blob/master/LICENSE">BSD-2 license</a> ·
+    <a href="about.html">about</a> ·
     built at night, on purpose
   </p>
 </footer>

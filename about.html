@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>about — Hawk</title>
+<meta name="description" content="Why Hawk exists, where it is, where it is going, and a few honest answers.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+
+<header>
+  <nav>
+    <span class="brand">Hawk</span>
+    <a href="index.html">home</a>
+    <a href="features.html">features</a>
+    <a href="install.html">install</a>
+    <a href="docs.html">docs</a>
+    <a href="about.html" class="current">about</a>
+  </nav>
+  <h1>about</h1>
+  <p class="tagline">Hawk, a browser that stays out of your way. Here is who made it, why, and what it will never pretend to be.</p>
+</header>
+
+<main>
+  <section>
+    <h2>why it exists</h2>
+    <p>
+      Because the browsers that exist are always doing something. Updating in
+      the background. Offering you an account. Synthesizing a summary of the
+      article you were about to read. Hawk exists to do the one thing a
+      browser is for — show you the web — and then get out of the way.
+    </p>
+    <p>
+      It's written in C because C doesn't need a runtime, a framework-of-the-
+      month, or a podcast. It uses GTK4 and WebKitGTK because those are the
+      closest thing Linux has to plumbing that's already installed.
+    </p>
+  </section>
+
+  <section>
+    <h2>privacy, in practice</h2>
+    <ul>
+      <li>your queries go to a SearXNG running on your own machine, or to a plain DuckDuckGo HTML page, never to a corporation's API</li>
+      <li>cookies are kept — you stay logged in — but third-party cookies are blocked by default</li>
+      <li>nothing phones home. there is no home to phone.</li>
+      <li>your data is one folder: <code>~/.hawk</code>. delete it and the browser remembers nothing about you, which is the correct way to forget someone</li>
+    </ul>
+  </section>
+
+  <section id="addons">
+    <h2>can it run Firefox / Mozilla add-ons?</h2>
+    <p>No. Honest answer, no plans to fake it.</p>
+    <p>
+      Firefox add-ons from AMO are written against the WebExtensions API
+      (<code>browser.*</code>), which is Mozilla's extension runtime. Hawk is
+      built on WebKitGTK, and WebKitGTK does not implement that API, has no
+      add-on store, and exposes a completely different (native-code)
+      extension mechanism instead. There is no compatibility layer that makes
+      <code>browser.storage</code> exist in WebKitGTK — one would have to
+      reimplement the entire WebExtension API surface to host AMO add-ons,
+      which is roughly the same work as writing a second browser engine.
+    </p>
+    <p>
+      So: no uBlock Origin, no Privacy Badger, none of it. What Hawk does
+      instead — third-party cookie blocking, media off, local search — is
+      built in, so the most common reasons people install those extensions
+      are already handled without the middleman.
+    </p>
+  </section>
+
+  <section>
+    <h2>status &amp; roadmap</h2>
+    <p>
+      <b>alpha.</b> v0.1.0-alpha. It's a working browser: tabs, URL memory
+      with type-ahead, sessions, persistent cookies, dark mode, local search.
+      What it is not is v1.0.
+    </p>
+    <p>
+      The bugs that used to live here — logging you out on every close,
+      forgetting every URL, leaving a search engine running after you quit,
+      YouTube barely working — are dead. Their gravestones are in the commit
+      log, if you want to read them.
+    </p>
+  </section>
+
+  <section>
+    <h2>license &amp; housekeeping</h2>
+    <p>
+      BSD-2. Source at
+      <a href="https://github.com/sf0e/hawk">github.com/sf0e/hawk</a>.
+      Reports of bugs are welcome; reports of missing features are welcome;
+      pull requests are welcome and will be read slowly.
+    </p>
+    <p>Built at night, on purpose.</p>
+  </section>
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">home</a> ·
+    <a href="https://github.com/sf0e/hawk">source</a> ·
+    <a href="https://github.com/sf0e/hawk/blob/master/LICENSE">BSD-2 license</a>
+  </p>
+</footer>
+
+</body>
+</html>

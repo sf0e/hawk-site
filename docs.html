@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>docs — Hawk</title>
+<meta name="description" content="Keybinds, hawk://config, where your data lives, and how the local search backend stays alive (and dies on cue).">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+
+<header>
+  <nav>
+    <span class="brand">Hawk</span>
+    <a href="index.html">home</a>
+    <a href="features.html">features</a>
+    <a href="install.html">install</a>
+    <a href="docs.html" class="current">docs</a>
+    <a href="about.html">about</a>
+  </nav>
+  <h1>docs</h1>
+  <p class="tagline">The part nobody reads until something behaves oddly.</p>
+</header>
+
+<main>
+  <section>
+    <h2>keybinds</h2>
+    <ul>
+      <li><kbd>Ctrl+T</kbd> — new tab</li>
+      <li><kbd>Ctrl+W</kbd> — close tab</li>
+      <li><kbd>Ctrl+L</kbd> — focus the address bar</li>
+      <li><kbd>Ctrl+R</kbd> — reload</li>
+      <li><kbd>Alt+W</kbd> — close tab, but with more feeling</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>hawk://config</h2>
+    <p>
+      Hawk has a settings page that lives inside the browser itself, because
+      a settings <i>window</i> is another thing in your way. Type
+      <code>hawk://config</code> in the bar.
+    </p>
+    <p>There you can toggle:</p>
+    <ul>
+      <li><code>local</code> — local SearXNG on/off</li>
+      <li><code>block3p</code> — third-party cookie blocking</li>
+      <li><code>ualock</code> — fixed user agent</li>
+      <li><code>blockmedia</code> — camera &amp; microphone off</li>
+      <li><code>dark</code> — dark mode (also makes the web dark)</li>
+      <li><code>restore</code> — restore last session on start</li>
+      <li><code>history</code> — how many URLs it remembers (10–2000)</li>
+      <li><code>home</code> — the home page URL</li>
+    </ul>
+    <p>And two actions for when you decide you were never here:</p>
+    <ul>
+      <li><code>action=clear_history</code> — forget every URL (the file is wiped too)</li>
+      <li><code>action=clear_cookies</code> — log out of everything, everywhere, at once</li>
+    </ul>
+    <p>
+      Every change saves to <code>~/.hawk/hawk.ini</code> and applies to
+      all open tabs immediately.
+    </p>
+  </section>
+
+  <section id="data">
+    <h2>where your data lives</h2>
+    <p>Everything is inside <code>~/.hawk</code>. Back it up by copying that one folder.</p>
+    <ul>
+      <li><code>~/.hawk/hawk.ini</code> — settings</li>
+      <li><code>~/.hawk/history</code> — URL memory (newest first, deduped, capped)</li>
+      <li><code>~/.hawk/session</code> — tabs open when you last closed it</li>
+      <li><code>~/.hawk/cookies/cookies.sqlite</code> — cookies, persistent, your logins survive restarts</li>
+      <li><code>~/.hawk/searchd/src</code> + <code>~/venv</code> — the SearXNG checkout and its virtualenv</li>
+      <li><code>~/.hawk/searchd/searchd.pid</code> — the backend's pidfile. it's used properly now</li>
+      <li><code>~/.hawk/searchd/searchd.log</code> — backend whispers</li>
+    </ul>
+  </section>
+
+  <section id="search">
+    <h2>the search backend, and why it dies on cue</h2>
+    <p>
+      Hawk boots a private SearXNG when the browser opens and kills it when
+      the browser closes. There was a time when closing the browser left the
+      engine running forever, because the pidfile recorded the wrong process
+      — the kill signal went to a wrapper, and the wrapper went to heaven
+      while the engine kept squatting on your machine. That is fixed:
+    </p>
+    <ul>
+      <li>the pidfile records the actual python process now</li>
+      <li><code>stop</code> verifies the process died, escalates to <code>kill -9</code>, and sweeps for anything that slipped through the name <code>searx.webapp</code></li>
+      <li>the browser installs a <code>SIGTERM</code>/<code>SIGINT</code> handler, so even "kill hawk" from a terminal takes the engine down with it</li>
+      <li>port <code>8080</code> and the loopback interface only — nowhere else on your network</li>
+    </ul>
+    <p>
+      If the engine can't start (first run, no network for the clone), Hawk
+      falls back to DuckDuckGo HTML. It never opens at a tracking engine.
+    </p>
+  </section>
+
+  <section>
+    <h2>quirks (honest)</h2>
+    <ul class="not-list">
+      <li>WebKitGTK cannot run Firefox / Mozilla add-ons. Engine limitation, not laziness. <a href="about.html#addons">details in about →</a></li>
+      <li>the address bar uses the same box for URLs and searches. if it looks like a URL, it's a URL</li>
+      <li>the first launch is slow because it clones a search engine. subsequent launches are not</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">home</a> ·
+    <a href="https://github.com/sf0e/hawk">source</a> ·
+    <a href="https://github.com/sf0e/hawk/blob/master/LICENSE">BSD-2 license</a>
+  </p>
+</footer>
+
+</body>
+</html>

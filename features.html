@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>features — Hawk</title>
+<meta name="description" content="Everything Hawk does, and just as important, everything it refuses to do.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage">
+
+<header>
+  <nav>
+    <span class="brand">Hawk</span>
+    <a href="index.html">home</a>
+    <a href="features.html" class="current">features</a>
+    <a href="install.html">install</a>
+    <a href="docs.html">docs</a>
+    <a href="about.html">about</a>
+  </nav>
+  <h1>features</h1>
+  <p class="tagline">Everything Hawk does, and just as important, everything it refuses to do.</p>
+</header>
+
+<main>
+  <section>
+    <h2>the basics</h2>
+    <ul>
+      <li>tabs: <kbd>Ctrl+T</kbd> open, <kbd>Alt+W</kbd> close, <kbd>Ctrl+L</kbd> bar, <kbd>Ctrl+R</kbd> reload</li>
+      <li>pill-shaped omnibar and pill tabs, nothing else in the way</li>
+      <li>popups become tabs, because popups are for cowards</li>
+      <li>file downloads land without ceremony</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>it remembers (on purpose)</h2>
+    <ul>
+      <li><b>URL memory</b> — every page you visit is kept in <code>~/.hawk/history</code> and offered back as you type. start typing and it finishes for you, like any browser should have from year one</li>
+      <li><b>sessions</b> — your open tabs are saved on close and restored on launch. hit the power and it doesn't forget what you were doing</li>
+      <li><b>cookies that stay</b> — stored in <code>~/.hawk/cookies/cookies.sqlite</code>. log in once, stay logged in. the old version logged you out every single time you closed it, which was the single most depressing bug in it</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>it forgets (on purpose)</h2>
+    <ul>
+      <li>third-party cookies blocked by default</li>
+      <li>camera &amp; microphone off until you say otherwise (deep breath — you can't say otherwise yet, visit <code>hawk://config</code> ... also no. it's locked. sorry)</li>
+      <li>one fixed user agent, no fingerprint breadcrumbs from Hawk itself</li>
+      <li>no telemetry, no account, no sync-to-nowhere, no "AI" anything</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>the search part</h2>
+    <p>
+      Hawk runs its own <b>SearXNG</b>, bound to <code>127.0.0.1:8080</code>,
+      on your machine. It starts with the browser, stops with it, and your
+      queries never leave home. If it can't start, Hawk falls back to
+      DuckDuckGo HTML rather than silently routing you somewhere heavier.
+    </p>
+    <p><a href="docs.html#search">how the backend lives and dies →</a></p>
+  </section>
+
+  <section>
+    <h2>what it is not</h2>
+    <ul class="not-list">
+      <li>not a Chrome reskin</li>
+      <li>not a data collector</li>
+      <li>not a Firefox — it cannot run Mozilla / AMO add-ons, and it will never pretend otherwise</li>
+      <li>not available for Windows or macOS, and never will be</li>
+      <li>not finished</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">home</a> ·
+    <a href="https://github.com/sf0e/hawk">source</a> ·
+    <a href="https://github.com/sf0e/hawk/blob/master/LICENSE">BSD-2 license</a>
+  </p>
+</footer>
+
+</body>
+</html>
